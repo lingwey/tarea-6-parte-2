@@ -1,0 +1,15 @@
+.escondido{
+    display: none;
+}
+
+body{
+    background-color: aquamarine;
+    margin: 10px;
+    padding: 10px;
+    font-family: sans-serif;
+
+}
+
+#ingreso-sueldos{
+    display: inline-block;
+}
