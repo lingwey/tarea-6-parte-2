@@ -26,7 +26,7 @@ function mayoSalario (salario){
     return mayor;
 }
 
-function menorSalario (){
+function menorSalario (salario){
     let menor = salario[0];
     for (let i = 0; i < salario.length; i++){
         if (menor > salario[i]){

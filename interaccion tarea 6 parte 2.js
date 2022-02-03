@@ -106,5 +106,5 @@ function obtenerSueldos (){
 }
 
 function mostrarSueldos (tipo, sueldo){
-    document.querySelector(`#${tipo}`).textContent = valor;
+    document.querySelector(`#${tipo}`).textContent = sueldo;
 }
