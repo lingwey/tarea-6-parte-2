@@ -19,7 +19,7 @@ document.querySelector('#agregar').onclick = function(event){
 
 function crearIntegrante (){
     const $div = document.createElement('div');
-    $div.className = '.familiar';
+    $div.className = 'familiar';
 
     const $label = document.createElement('label');
     $label.textContent = 'ingrese el salario anual #';
