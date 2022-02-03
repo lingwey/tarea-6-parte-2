@@ -7,11 +7,10 @@ Punto bonus: si hay inputs vacíos, ignorarlos en el cálculo (no contarlos como
 */
 
 document.querySelector('#agregar').onclick = function(event){
-    //let integrante = 0
-    //integrante +=1
     crearIntegrante();
     mostrarResetear();
     mostrarCalcular();
+    esconderTitulos ();
     event.preventDefault();
 }
 
@@ -22,7 +21,7 @@ function crearIntegrante (){
     $div.className = 'familiar';
 
     const $label = document.createElement('label');
-    $label.textContent = 'ingrese el salario anual #';
+    $label.textContent = 'ingrese el salario anual';
 
     const $input = document.createElement('input');
     $input.type = 'number';
@@ -40,20 +39,20 @@ document.querySelector('#calcular').onclick = function(event){
     mostrarSueldos ("menor", menorSalario(sueldos));
     mostrarSueldos ("promedioA", salarioAnual(sueldos));
     mostrarSueldos ("promedioM", salarioMensual(sueldos));
-
-    console.log (sueldos)
+    esconderCalcular();
     esconderAgregar();
     mostrarResultados ();
     event.preventDefault();
 }
 
-document.querySelectorAll('#reiniciar').onclick = reiniciar();
+document.querySelector('#reiniciar').onclick = reiniciar();
 
 function reiniciar (){
     mostrarAgregar();
     esconderResultado ();
     esconderCalcular();
     esconderResetear();
+    mostrarTitulo ();
     borrarTodo ();
 }
 
@@ -107,4 +106,14 @@ function obtenerSueldos (){
 
 function mostrarSueldos (tipo, sueldo){
     document.querySelector(`#${tipo}`).textContent = sueldo;
+}
+
+function esconderTitulos (){
+    document.querySelector('#titulo').className = 'escondido';
+    document.querySelector('#subtitulo').className = '';
+}
+
+function mostrarTitulo (){
+    document.querySelector('#titulo').className = '';
+    document.querySelector('#subtitulo').className ='escondido';
 }
