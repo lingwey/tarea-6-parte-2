@@ -1,17 +1,9 @@
-/*
-TAREA:
-Crear una interfaz que permita agregar ó quitar (botones agregar y quitar) inputs+labels para completar el salario anual de cada integrante de la familia que trabaje.
-Al hacer click en "calcular", mostrar en un elemento pre-existente el mayor salario anual, menor salario anual, salario anual promedio y salario mensual promedio.
-
-Punto bonus: si hay inputs vacíos, ignorarlos en el cálculo (no contarlos como 0).
-*/
-
 document.querySelector('#agregar').onclick = function(event){
+    event.preventDefault();
     crearIntegrante();
     mostrarResetear();
     mostrarCalcular();
     esconderTitulos ();
-    event.preventDefault();
 }
 
 
@@ -34,15 +26,23 @@ function crearIntegrante (){
 
 }
 document.querySelector('#calcular').onclick = function(event){
-    const sueldos = obtenerSueldos ();
-    mostrarSueldos ("mayor", mayoSalario(sueldos));
-    mostrarSueldos ("menor", menorSalario(sueldos));
-    mostrarSueldos ("promedioA", salarioAnual(sueldos));
-    mostrarSueldos ("promedioM", salarioMensual(sueldos));
-    esconderCalcular();
-    esconderAgregar();
-    mostrarResultados ();
     event.preventDefault();
+    const validacionSueldos = validarIngresoSueldos();
+    const errores = {
+        sueldos: validacionSueldos
+    }
+    const calcularSueldos = manejarErrores(errores) === 0;
+    if (calcularSueldos){
+        const sueldos = obtenerSueldos ();
+        mostrarSueldos ("mayor", obtenerMayoSalario(sueldos));
+        mostrarSueldos ("menor", obtenerMenorSalario(sueldos));
+        mostrarSueldos ("promedioA", obtenerSalarioAnual(sueldos));
+        mostrarSueldos ("promedioM", obtenerSalarioMensual(sueldos));
+        esconderCalcular();
+        esconderAgregar();
+        mostrarResultados ();
+        limpiarMarcadorErrores();
+    }
 }
 
 document.querySelector('#reiniciar').onclick = reiniciar();
@@ -54,6 +54,7 @@ function reiniciar (){
     esconderResetear();
     mostrarTitulo ();
     borrarTodo ();
+    limpiarMarcadorErrores();
 }
 
 function mostrarResetear (){
@@ -117,3 +118,50 @@ function mostrarTitulo (){
     document.querySelector('#titulo').className = '';
     document.querySelector('#subtitulo').className ='escondido';
 }
+
+function validarIngresoSueldos (){
+    const revisarIngresoSueldos = obtenerSueldos()
+    for (let i = 0; i < revisarIngresoSueldos.length; i++){
+        if (revisarIngresoSueldos[i] === 0){
+            return 'deve ingresar un sueldo';
+            break;
+        }
+        if (revisarIngresoSueldos[i] < 0){
+            return 'el sueldo no puede ser negativo';
+            break;
+        }
+        if (!/^[0-9]+$/i.test(revisarIngresoSueldos[i])){
+            return 'solo se puede ingresar numeros enteros'
+            break
+        }
+    }
+    return '';
+}
+
+function manejarErrores (errores){
+    const llave = Object.keys(errores);
+    const mostrarError = document.querySelector('#mostrar-errores');
+    let contadorErrores = 0;
+
+    llave.forEach(function(llave){
+        const error = errores[llave];
+
+        if(error){
+            contadorErrores ++;
+            $error = document.createElement('li');
+            $error.textContent = error;
+            $error.className = 'error alert alert-danger';
+            mostrarError.appendChild($error);
+        }
+    })
+    return contadorErrores;
+}
+
+
+function limpiarMarcadorErrores (){
+    const marcadorErrores = document.querySelectorAll('.error');
+    for (let i = 0; i < marcadorErrores.length; i++){
+        marcadorErrores[i].remove()
+    }
+}
+

@@ -1,4 +1,4 @@
-function salarioMensual (salario){
+function obtenerSalarioMensual (salario){
     let contador = 0;
     for (let i = 0; i < salario.length; i++){
         contador += salario[i]
@@ -7,7 +7,7 @@ function salarioMensual (salario){
     return mensual / salario.length;
 }
 
-function salarioAnual (salario){
+function obtenerSalarioAnual (salario){
     let contador = 0;
     for (let i = 0; i < salario.length; i++){
         contador += salario[i]
@@ -16,7 +16,7 @@ function salarioAnual (salario){
 }
 
 
-function mayoSalario (salario){
+function obtenerMayoSalario (salario){
     let mayor = salario[0]
     for (let i = 0; i < salario.length; i++){
         if (mayor < salario[i]){
@@ -26,7 +26,7 @@ function mayoSalario (salario){
     return mayor;
 }
 
-function menorSalario (salario){
+function obtenerMenorSalario (salario){
     let menor = salario[0];
     for (let i = 0; i < salario.length; i++){
         if (menor > salario[i]){
