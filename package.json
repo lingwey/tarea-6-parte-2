@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "bootstrap": "^5.1.3"
+  },
+  "name": "tarea-6-parte-2",
+  "version": "1.0.0",
+  "description": "agrega bootstrap a la actividad 2 de la tarea 6",
+  "main": "tarea-6-parte-2-index.html",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lingwey/tarea-6-parte-2.git"
+  },
+  "author": "lingwey",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lingwey/tarea-6-parte-2/issues"
+  },
+  "homepage": "https://github.com/lingwey/tarea-6-parte-2#readme"
+}
