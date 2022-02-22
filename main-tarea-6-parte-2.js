@@ -27,22 +27,17 @@ function crearIntegrante (){
 }
 document.querySelector('#calcular').onclick = function(event){
     event.preventDefault();
-    const validacionSueldos = validarIngresoSueldos();
-    const errores = {
-        sueldos: validacionSueldos
-    }
-    const calcularSueldos = manejarErrores(errores) === 0;
-    if (calcularSueldos){
-        const sueldos = obtenerSueldos ();
-        mostrarSueldos ("mayor", obtenerMayoSalario(sueldos));
-        mostrarSueldos ("menor", obtenerMenorSalario(sueldos));
-        mostrarSueldos ("promedioA", obtenerSalarioAnual(sueldos));
-        mostrarSueldos ("promedioM", obtenerSalarioMensual(sueldos));
-        esconderCalcular();
-        esconderAgregar();
-        mostrarResultados ();
-        limpiarMarcadorErrores();
-    }
+   
+    const sueldos = obtenerSueldos ();
+    mostrarSueldos ("mayor", obtenerMayoSalario(sueldos));
+    mostrarSueldos ("menor", obtenerMenorSalario(sueldos));
+    mostrarSueldos ("promedioA", obtenerSalarioAnual(sueldos));
+    mostrarSueldos ("promedioM", obtenerSalarioMensual(sueldos));
+    esconderCalcular();
+    esconderAgregar();
+    mostrarResultados ();
+    limpiarMarcadorErrores();
+    
 }
 
 document.querySelector('#reiniciar').onclick = reiniciar();
@@ -102,7 +97,14 @@ function obtenerSueldos (){
     for (let i =0; i < $sueldos.length; i++){
         sueldos.push(Number($sueldos[i].value));
     }
-    return sueldos;
+    const revisarIngresoSueldos = validarIngresoSueldos(sueldos);
+    const errores = {
+        validarSueldos : revisarIngresoSueldos
+    }
+    const validar = manejarErrores(errores) === 0;
+    if (validar){
+        return sueldos;
+    }
 }
 
 function mostrarSueldos (tipo, sueldo){
@@ -119,8 +121,7 @@ function mostrarTitulo (){
     document.querySelector('#subtitulo').className ='escondido';
 }
 
-function validarIngresoSueldos (){
-    const revisarIngresoSueldos = obtenerSueldos()
+function validarIngresoSueldos (revisarIngresoSueldos){
     for (let i = 0; i < revisarIngresoSueldos.length; i++){
         if (revisarIngresoSueldos[i] === 0){
             return 'deve ingresar un sueldo';
