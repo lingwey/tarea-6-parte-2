@@ -1,8 +1,8 @@
 document.querySelector('#agregar').onclick = function(event){
     event.preventDefault();
     crearIntegrante();
-    mostrarResetear();
-    mostrarCalcular();
+    mostrarBotonResetear();
+    mostrarBotonCalcular();
     esconderTitulos ();
 }
 
@@ -13,9 +13,11 @@ function crearIntegrante (){
     $div.className = 'familiar';
 
     const $label = document.createElement('label');
+    $label.className = 'input-group-text';
     $label.textContent = 'ingrese el salario anual';
 
     const $input = document.createElement('input');
+    $input.className = 'form-control';
     $input.type = 'number';
 
     $div.appendChild($label);
@@ -33,8 +35,8 @@ document.querySelector('#calcular').onclick = function(event){
     mostrarSueldos ("menor", obtenerMenorSalario(sueldos));
     mostrarSueldos ("promedioA", obtenerSalarioAnual(sueldos));
     mostrarSueldos ("promedioM", obtenerSalarioMensual(sueldos));
-    esconderCalcular();
-    esconderAgregar();
+    esconderBotonCalcular();
+    esconderBotonAgregar();
     mostrarResultados ();
     limpiarMarcadorErrores();
     
@@ -43,28 +45,28 @@ document.querySelector('#calcular').onclick = function(event){
 document.querySelector('#reiniciar').onclick = reiniciar();
 
 function reiniciar (){
-    mostrarAgregar();
+    mostrarBotonAgregar();
     esconderResultado ();
-    esconderCalcular();
-    esconderResetear();
+    esconderBotonCalcular();
+    esconderBotonResetear();
     mostrarTitulo ();
     borrarTodo ();
     limpiarMarcadorErrores();
 }
 
-function mostrarResetear (){
-    document.querySelector('#reiniciar').className= '';
+function mostrarBotonResetear (){
+    document.querySelector('#reiniciar').className= 'btn btn-outline-primary';
 }
 
-function mostrarCalcular (){
-    document.querySelector('#calcular').className = '';
+function mostrarBotonCalcular (){
+    document.querySelector('#calcular').className = 'btn btn-outline-primary';
 }
 
-function esconderResetear (){
+function esconderBotonResetear (){
     document.querySelector('#reiniciar').className = 'escondido';
 }
 
-function esconderCalcular (){
+function esconderBotonCalcular (){
     document.querySelector('#calcular').className = 'escondido';
 }
 
@@ -76,12 +78,12 @@ function esconderResultado (){
     document.querySelector('#resultados').className = 'escondido';
 }
 
-function esconderAgregar (){
+function esconderBotonAgregar (){
     document.querySelector('#agregar').className = 'escondido';
 }
 
-function mostrarAgregar (){
-    document.querySelector('#agregar').className = '';
+function mostrarBotonAgregar (){
+    document.querySelector('#agregar').className = 'btn btn-outline-primary';
 }
 
 function borrarTodo (){
@@ -113,11 +115,11 @@ function mostrarSueldos (tipo, sueldo){
 
 function esconderTitulos (){
     document.querySelector('#titulo').className = 'escondido';
-    document.querySelector('#subtitulo').className = '';
+    document.querySelector('#subtitulo').className = 'fs-4';
 }
 
 function mostrarTitulo (){
-    document.querySelector('#titulo').className = '';
+    document.querySelector('#titulo').className = 'fs-4';
     document.querySelector('#subtitulo').className ='escondido';
 }
 
